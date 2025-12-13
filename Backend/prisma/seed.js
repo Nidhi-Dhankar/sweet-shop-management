@@ -62,6 +62,24 @@ async function main() {
             console.log(`Skipping ${sweet.name}, already exists.`);
         }
     }
+
+    // Create default admin user
+    const adminEmail = "admin4@example.com";
+    const existingAdmin = await prisma.user.findUnique({ where: { email: adminEmail } });
+    if (!existingAdmin) {
+        const hashedPassword = await require("bcryptjs").hash("password@123", 10);
+        await prisma.user.create({
+            data: {
+                name: "Admin User",
+                email: adminEmail,
+                password: hashedPassword,
+                isAdmin: true,
+            },
+        });
+        console.log(`Created admin user: ${adminEmail}`);
+    } else {
+        console.log(`Admin user ${adminEmail} already exists`);
+    }
 }
 
 main()

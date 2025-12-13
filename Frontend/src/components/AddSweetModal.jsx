@@ -33,10 +33,20 @@ function AddSweetModal({ onClose, onSweetAdded }) {
                 throw new Error("Please fill in all required fields");
             }
 
-            await API.post("/sweets", {
-                ...formData,
-                price: parseFloat(formData.price),
-                quantity: parseInt(formData.quantity)
+            const data = new FormData();
+            data.append("name", formData.name);
+            data.append("category", formData.category);
+            data.append("price", formData.price);
+            data.append("quantity", formData.quantity);
+            data.append("description", formData.description);
+            if (formData.image) {
+                data.append("image", formData.image);
+            }
+
+            await API.post("/sweets", data, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
             });
 
             onSweetAdded();
@@ -131,13 +141,12 @@ function AddSweetModal({ onClose, onSweetAdded }) {
                     </div>
 
                     <div className="form-group">
-                        <label>Image URL (Optional)</label>
+                        <label>Image (Upload)</label>
                         <input
-                            type="url"
+                            type="file"
                             name="image"
-                            value={formData.image || ""}
-                            onChange={handleChange}
-                            placeholder="https://example.com/sweet.jpg"
+                            accept="image/*"
+                            onChange={(e) => setFormData({ ...formData, image: e.target.files[0] })}
                         />
                     </div>
 

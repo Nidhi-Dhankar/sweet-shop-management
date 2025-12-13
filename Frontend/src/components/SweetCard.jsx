@@ -51,16 +51,18 @@ function SweetCard({ sweet, onDelete, onViewDetails }) {
           <span className="category-tag">{sweet.category}</span>
         </div>
 
-        {sweet.image && (
-          <div
-            className="sweet-image-container"
-            onClick={() => onViewDetails && onViewDetails(sweet)}
-            style={{ cursor: "pointer" }}
-            title="Click for details"
-          >
-            <img src={sweet.image} alt={sweet.name} className="sweet-image" />
-          </div>
-        )}
+        <div
+          className="sweet-image-container"
+          onClick={() => onViewDetails && onViewDetails(sweet)}
+          style={{ cursor: "pointer" }}
+          title="Click for details"
+        >
+          <img
+            src={sweet.image || "https://images.unsplash.com/photo-1579372786545-d24232daf58c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"}
+            alt={sweet.name}
+            className="sweet-image"
+          />
+        </div>
 
         {sweet.description && (
           <p className="sweet-description">{sweet.description}</p>

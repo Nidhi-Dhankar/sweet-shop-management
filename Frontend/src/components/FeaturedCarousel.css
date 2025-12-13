@@ -23,6 +23,12 @@
     align-items: flex-start;
 }
 
+/* Reduce price font size specifically for the Today's Special Card */
+.todays-special-section .sweet-card .price-value {
+    font-size: 1.2rem !important;
+    /* Overriding default 1.75rem */
+}
+
 .special-card-wrapper {
     transform: scale(1.05);
     margin-left: 1rem;

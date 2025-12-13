@@ -28,7 +28,22 @@ export const searchSweets = async (req: Request, res: Response) => {
 
 export const addSweet = async (req: Request, res: Response) => {
   try {
-    const sweet = await createSweet(req.body);
+    const sweetData = req.body;
+
+    // Parse numeric values (since FormData sends everything as strings)
+    if (sweetData.price) sweetData.price = parseFloat(sweetData.price);
+    if (sweetData.quantity) sweetData.quantity = parseInt(sweetData.quantity);
+
+    // Handle image file
+    if (req.file) {
+      // Assuming server runs on the same host/port logic or use full URL Env Var
+      // For now, construct relative path or full URL based on request
+      const protocol = req.protocol;
+      const host = req.get('host');
+      sweetData.image = `${protocol}://${host}/uploads/${req.file.filename}`;
+    }
+
+    const sweet = await createSweet(sweetData);
     res.status(201).json(sweet);
   } catch (err: any) {
     res.status(400).json({ error: err.message || "Failed to create sweet" });

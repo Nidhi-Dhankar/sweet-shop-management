@@ -18,6 +18,7 @@ app.use(cors({
   credentials: true,
 }));
 app.use(express.json());
+app.use("/uploads", express.static("uploads"));
 
 // Request Logger
 app.use((req, res, next) => {
