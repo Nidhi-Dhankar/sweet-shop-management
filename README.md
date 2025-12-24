@@ -96,7 +96,7 @@ Before running the project, make sure you have installed:
 
 ## 📁 Project Structure
 
-```
+
 Sweet Shop management/
 ├── Backend/              # Node.js + Express + TypeScript + Prisma
 │   ├── src/
@@ -115,6 +115,13 @@ Sweet Shop management/
     │   └── services/     # API service
     └── index.html        # Entry point
 ```
+
+## 📸 Screenshots
+
+![Dashboard](images/dashboard.png)
+![Sweet Details](images/sweet-details.png)
+![Add Sweet](images/add-sweet.png)
+![Cart](images/cart.png)
 
 ## 🔌 API Endpoints
 
